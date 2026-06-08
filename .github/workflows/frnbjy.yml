@@ -32,10 +32,11 @@ jobs:
       - name: Grant execute permission for gradlew
         run: chmod +x ./gradlew
         
-      - name: Install Gradle
+      - name: Install Gradle 7.2
         run: |
-          sudo apt-get update -y
-          sudo apt-get install -y gradle
+          wget https://services.gradle.org/distributions/gradle-7.2-bin.zip -O gradle-7.2-bin.zip
+          unzip gradle-7.2-bin.zip -d /tmp
+          echo "/tmp/gradle-7.2/bin" >> $GITHUB_PATH
         
       - name: Validate Gradle
         run: gradle --version
