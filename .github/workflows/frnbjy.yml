@@ -32,14 +32,19 @@ jobs:
       - name: Grant execute permission for gradlew
         run: chmod +x ./gradlew
         
-      - name: Validate Gradle Wrapper
-        run: ./gradlew --version
+      - name: Install Gradle
+        run: |
+          sudo apt-get update -y
+          sudo apt-get install -y gradle
+        
+      - name: Validate Gradle
+        run: gradle --version
         
       - name: Build Debug APK
-        run: ./gradlew assembleDebug --stacktrace
+        run: gradle assembleDebug --stacktrace
         
       - name: Build Release APK
-        run: ./gradlew assembleRelease --stacktrace
+        run: gradle assembleRelease --stacktrace
         
       - name: Upload Debug APK
         uses: actions/upload-artifact@v4
